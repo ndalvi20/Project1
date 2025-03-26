@@ -11,6 +11,13 @@ class LassoHomotopyModel():
         self.active_set = None
 
     def fit(self, X, y):
+        if X.dtype.kind not in 'fc':
+            X = X.astype(np.float64)
+        if y.dtype.kind not in 'fc':
+            y = y.astype(np.float64)
+        if y.ndim > 1:
+            y = y.flatten()
+
         n, m = X.shape
         mu = self.mu * n * self.scale_mu
         max_iterations = self.max_iterations
@@ -99,4 +106,7 @@ class LassoHomotopyResults():
         self.coefficients = coefficients
 
     def predict(self, x):
-        return x @ self.coefficients
+        if x.dtype.kind not in 'fc':
+            x = x.astype(np.float64)
+        preds =  x @ self.coefficients
+        return preds.reshape(-1, 1)
