@@ -1,6 +1,6 @@
 import numpy as np
-from sklearn.metrics import mean_squared_error, r2_score
 import math
+from sklearn.metrics import mean_squared_error, r2_score
 
 # This is the main model class for LASSO regression using the Homotopy method
 class LassoHomotopyModel():
@@ -39,6 +39,8 @@ class LassoHomotopyModel():
             active_indices = set()
             residuals = y.copy()
 
+        # Initialize active_list early to prevent undefined variable error if no features are activated. 
+        active_list = []
         iteration_counter = 0
 
         # Main loop — this gradually builds up the set of active features
@@ -110,6 +112,10 @@ class LassoHomotopyModel():
 
                 break
 
+        # If no coefficients were ever updated default to zero vector.
+        if 'theta_active' not in locals():
+            theta_active = np.zeros(len(active_list))
+
         # Create full coefficient vector (zeros for inactive features)
         coefficients = np.zeros(m)
         for idx, coef in zip(active_list, theta_active):
@@ -130,32 +136,32 @@ class LassoHomotopyResults():
         preds = x @ self.coefficients
         return preds.reshape(-1, 1)  # Ensure 2D output
     
-    # Root Mean Square Error: how far are our predictions from actual values on average
+    # Calculates Root Mean Squared Error between true and predicted targets.
     def rmse(self, y_true, y_pred):
         return math.sqrt(mean_squared_error(y_true, y_pred))
 
-    # R-squared Score: how much variance in target is explained by the model
+    # Computes R-squared: proportion of variance explained by the model.
     def r2_score(self, y_true, y_pred):
         return r2_score(y_true, y_pred)
-
-    # Mean Absolute Error: average of absolute errors
+    
+    # Computes Mean Absolute Error: average magnitude of errors.
     def mae(self, y_true, y_pred):
         return np.mean(np.abs(y_true - y_pred))
 
-    # Pearson Correlation: how strongly predictions align linearly with actual values
+    # Computes Pearson correlation coefficient between predictions and ground truth
     def correlation(self, y_true, y_pred):
         if np.std(y_true) == 0 or np.std(y_pred) == 0:
             return float('nan')
         return np.corrcoef(y_true.flatten(), y_pred.flatten())[0, 1]
 
-    # Nicely print all evaluation metrics
+    # Print model coefficients and evaluation metrics if X and y are provided
     def summary(self, x=None, y_true=None):
         print("Coefficients:", self.coefficients)
         if x is not None and y_true is not None:
             y_pred = self.predict(x)
-            print("RMSE: ", round(self.rmse(y_true, y_pred), 4))
-            print("R2 Score: ", round(self.r2_score(y_true, y_pred), 4))
-            print("MAE: ", round(self.mae(y_true, y_pred), 4))
-            print("Correlation (r): ",round(self.correlation(y_true, y_pred), 4))
+            print(f"RMSE: {self.rmse(y_true, y_pred):.4f}")
+            print(f"R2 Score: {self.r2_score(y_true, y_pred):.4f}")
+            print(f"MAE: {self.mae(y_true, y_pred):.4f}")
+            print(f"Correlation (r): {self.correlation(y_true, y_pred):.4f}")
         else:
             print("Provide X and y to compute evaluation metrics.")
