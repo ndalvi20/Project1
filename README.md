@@ -72,16 +72,16 @@ Project1/
 │   ├── tests/
 │   |   └── test_LassoHomotopy.py
 |   |   └── images/
-│   |       ├── 1.png
-│   |       ├── 2.png
-│   |       ├── 3.png
-│   |       ├── 4.png
-│   |       ├── 5.png
-│   |       ├── 6.png
-│   |       ├── 7.png
-│   |       ├── 8.png
-│   |       ├── 9.png
-│   |       └── 10.png
+│   |       ├── test_1.png
+│   |       ├── test_2.png
+│   |       ├── test_3.png
+│   |       ├── test_4.png
+│   |       ├── test_5.png
+│   |       ├── test_6.png
+│   |       ├── test_7.png
+│   |       ├── test_8.png
+│   |       ├── test_9.png
+│   |       └── test_10.png
 │   └── visualizations/
 │       ├── LassoVisualization.ipynb
 │       └── images/
