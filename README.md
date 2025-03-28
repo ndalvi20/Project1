@@ -157,16 +157,16 @@ We implemented **10 rigorous test cases** to evaluate different aspects of model
 All tests include detailed output for RMSE, R2 score, MAE, and correlation.
 
 **Test Outputs:**
-![Test 1](./LassoHomotopy/tests/images/1.png)
-![Test 2](./LassoHomotopy/tests/images/2.png)
-![Test 3](./LassoHomotopy/tests/images/3.png)
-![Test 4](./LassoHomotopy/tests/images/4.png)
-![Test 5](./LassoHomotopy/tests/images/5.png)
-![Test 6](./LassoHomotopy/tests/images/6.png)
-![Test 7](./LassoHomotopy/tests/images/7.png)
-![Test 8](./LassoHomotopy/tests/images/8.png)
-![Test 9](./LassoHomotopy/tests/images/9.png)
-![Test 10](./LassoHomotopy/tests/images/10.png)
+![Test 1](./LassoHomotopy/tests/images/test_1.png)
+![Test 2](./LassoHomotopy/tests/images/test_2.png)
+![Test 3](./LassoHomotopy/tests/images/test_3.png)
+![Test 4](./LassoHomotopy/tests/images/test_4.png)
+![Test 5](./LassoHomotopy/tests/images/test_5.png)
+![Test 6](./LassoHomotopy/tests/images/test_6.png)
+![Test 7](./LassoHomotopy/tests/images/test_7.png)
+![Test 8](./LassoHomotopy/tests/images/test_8.png)
+![Test 9](./LassoHomotopy/tests/images/test_9.png)
+![Test 10](./LassoHomotopy/tests/images/test_10.png)
 
 ## Limitations / Known Challenges
 - When **all features are zero**, we handle it gracefully by returning a zero vector (fixed).
